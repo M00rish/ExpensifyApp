@@ -1,0 +1,20 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Update hosts file
+    init: |
+      sudo sh -c 'echo "127.0.0.1 dev.new.expensify.com" >> /etc/hosts'
+    command: |
+      echo "Hosts file updated"
+
+  - name: Install dependencies
+    init: npm install
+    command: echo "Dependencies installed"
+
+  - name: Run web application
+    command: npm run web
+
+ports:
+  - port: 8080
+    onOpen: open-preview
