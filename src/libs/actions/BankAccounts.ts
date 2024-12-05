@@ -25,6 +25,7 @@ import type PlaidBankAccount from '@src/types/onyx/PlaidBankAccount';
 import type {BankAccountStep, ReimbursementAccountStep, ReimbursementAccountSubStep} from '@src/types/onyx/ReimbursementAccount';
 import type {OnyxData} from '@src/types/onyx/Request';
 import * as ReimbursementAccount from './ReimbursementAccount';
+import {buildOptmisticNextStepAfterBA} from '@src/libs/BankAccountUtils';
 
 export {
     goToWithdrawalAccountSetupStep,
@@ -196,7 +197,8 @@ function connectBankAccountWithPlaid(bankAccountID: number, selectedPlaidBankAcc
  *
  * TODO: offline pattern for this command will have to be added later once the pattern B design doc is complete
  */
-function addPersonalBankAccount(account: PlaidBankAccount) {
+function addPersonalBankAccount(account: PlaidBankAccount,NextStepReportID:string | undefined = undefined) {
+
     const parameters: AddPersonalBankAccountParams = {
         addressName: account.addressName ?? '',
         routingNumber: account.routingNumber,
@@ -218,6 +220,11 @@ function addPersonalBankAccount(account: PlaidBankAccount) {
                     errors: null,
                     plaidAccountID: account.plaidAccountID,
                 },
+            },
+            {
+                onyxMethod: Onyx.METHOD.MERGE,
+                key: `${ONYXKEYS.COLLECTION.NEXT_STEP}${NextStepReportID ?? ''}`,
+                value: NextStepReportID ? buildOptmisticNextStepAfterBA() : '',
             },
         ],
         successData: [

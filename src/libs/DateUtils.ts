@@ -448,6 +448,11 @@ function getOneWeekFromNow(): string {
     return format(date, 'yyyy-MM-dd HH:mm:ss');
 }
 
+function getSixDaysFromNow(): string {
+    const date = addDays(new Date(), 6);
+    return format(date, 'yyyy-MM-dd HH:mm:ss');
+}
+
 /**
  * param {string} dateTimeString
  * returns {string} example: 2023-05-16
@@ -893,6 +898,7 @@ const DateUtils = {
     isCardExpired,
     getDifferenceInDaysFromNow,
     isValidDateString,
+    getSixDaysFromNow,
 };
 
 export default DateUtils;
