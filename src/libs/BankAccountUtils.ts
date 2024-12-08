@@ -17,22 +17,22 @@ function buildOptmisticNextStepAfterBA(){
     const type: ReportNextStep['type'] = 'neutral';
     const optimisticNextStep: ReportNextStep = {
         type,
-        icon: CONST.NEXT_STEP.ICONS.STOPWATCH,
+        icon: CONST.NEXT_STEP.ICONS.HOURGLASS,
         message: [
             {
                 text: 'Waiting for ',
             },
             {
-                text: `payment`,
+                text: 'payment ',
             },
             {
-                text: ' to ',
+                text: 'to ',
             },
             {
-                text: 'complete',
+                text: 'complete ',
             },
             {
-                text: `By ${DateUtils.getSixDaysFromNow().split(' ')[0]}`,
+                text: `by ${DateUtils.getFiveDaysFromNow().split(' ')[0]}.`,
             },
         ],
     };

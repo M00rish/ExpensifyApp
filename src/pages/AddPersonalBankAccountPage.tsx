@@ -49,7 +49,7 @@ function AddPersonalBankAccountPage() {
         if (selectedPlaidBankAccount) {
             BankAccounts.addPersonalBankAccount(selectedPlaidBankAccount,personalBankAccount?.exitReportID);
         }
-    }, [plaidData, selectedPlaidAccountId]);
+    }, [plaidData, selectedPlaidAccountId,personalBankAccount?.exitReportID]);
 
     const exitFlow = useCallback(
         (shouldContinue = false) => {
